@@ -61,7 +61,9 @@ describe('createListingSchema Validation Suite', () => {
   });
 
   it('defaults amenities to an empty array when omitted', () => {
-    const { amenities, ...payloadWithoutAmenities } = validPayload;
+    const payloadWithoutAmenities = { ...validPayload };
+    delete (payloadWithoutAmenities as { amenities?: string[] }).amenities;
+
     const result = createListingSchema.safeParse(payloadWithoutAmenities);
     expect(result.success).toBe(true);
     if (result.success) {
