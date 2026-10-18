@@ -15,6 +15,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
 
   return (
     <article className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={property.imageUrl}
         alt={property.imageAlt}
