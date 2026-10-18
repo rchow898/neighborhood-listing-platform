@@ -12,7 +12,8 @@
     "@supabase/supabase-js": "^2.118.0",
     "next": "^16.4.2",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -31,6 +32,9 @@
     "micromatch": "^4.0.8",
     "fast-glob": {
       "micromatch": "^4.0.8"
+    },
+    "@next/eslint-plugin-next": {
+      "fast-glob": "^3.3.2"
     }
   },
   "allowScripts": {
