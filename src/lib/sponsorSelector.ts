@@ -5,6 +5,7 @@ import {
   compareSponsorsDeterministic,
   isSponsorEligible,
 } from "../types/sponsor";
+import { DEFAULT_HOUSE_SPONSORS } from "./sponsorFallback";
 
 /**
  * Step 4: Pure selection function separated from rendering.
@@ -45,4 +46,20 @@ export function selectSponsor(
     priority: winner.priority,
     createdAt: winner.createdAt,
   };
+}
+
+/**
+ * Step 5: Selects an eligible sponsor or falls back to a guaranteed house message
+ * if no candidate qualifies for the given placement and context.
+ */
+export function selectSponsorWithFallback(
+  context: EligibilityContext,
+  candidates: SponsorRecord[]
+): PublicSponsor {
+  const winner = selectSponsor(context, candidates);
+  if (winner !== null) {
+    return winner;
+  }
+
+  return DEFAULT_HOUSE_SPONSORS[context.placement];
 }
