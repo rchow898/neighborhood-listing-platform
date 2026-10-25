@@ -55,3 +55,19 @@ In compliance with the Fair Housing Act (42 U.S.C. 3604(c)) and digital consumer
    - **Protected Demographic Traits**: Any targeting based on race, color, national origin, religion, sex/gender, familial status, or disability is strictly barred from database schemas and runtime parameters.
    - **Caller Identity Tracking**: Caller profile IDs, persistent tracking cookies, cross-session user identifiers, and device fingerprints MUST NOT be passed to or utilized by candidate selection queries.
    - **Discriminatory Filtering / Redlining**: Campaigns may not use exclusionary demographic filters or selective neighborhood redlining.
+
+---
+
+## 4. Query Performance & EXPLAIN Plan Analysis (Step 12)
+
+### Target Candidate Selection Query
+```sql
+EXPLAIN ANALYZE
+SELECT 
+  id, name, headline, creative_url, destination_url, placement, priority, created_at
+FROM sponsors
+WHERE status = 'approved'
+  AND is_active = true
+  AND placement = 'listing_sidebar'
+  AND start_date <= NOW()
+  AND end_date >= NOW();
