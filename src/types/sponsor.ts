@@ -33,6 +33,23 @@ export const SponsorRecordSchema = z.object({
 
 export type SponsorRecord = z.infer<typeof SponsorRecordSchema>;
 
+// Public view exposed to presentation layers (no internal notes, billing, or CRM details)
+export const PublicSponsorSchema = SponsorRecordSchema.omit({
+  status: true,
+  isActive: true,
+}).extend({
+  id: z.string().uuid(),
+  name: z.string(),
+  headline: z.string(),
+  creativeUrl: z.string().url(),
+  destinationUrl: z.string().url(),
+  placement: SponsorPlacementSchema,
+  priority: z.number().int().nonnegative(),
+  createdAt: z.string().datetime(),
+});
+
+export type PublicSponsor = z.infer<typeof PublicSponsorSchema>;
+
 export interface EligibilityContext {
   currentTime: Date;
   placement: SponsorPlacement;
@@ -82,8 +99,8 @@ export function isSponsorEligible(
  * Tertiary: id ASC (lexicographical tie-breaker)
  */
 export function compareSponsorsDeterministic(
-  a: SponsorRecord,
-  b: SponsorRecord
+  a: SponsorRecord | PublicSponsor,
+  b: SponsorRecord | PublicSponsor
 ): number {
   if (b.priority !== a.priority) {
     return b.priority - a.priority;
