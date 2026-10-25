@@ -33,19 +33,16 @@ export const SponsorRecordSchema = z.object({
 
 export type SponsorRecord = z.infer<typeof SponsorRecordSchema>;
 
-// Public view exposed to presentation layers (no internal notes, billing, or CRM details)
-export const PublicSponsorSchema = SponsorRecordSchema.omit({
-  status: true,
-  isActive: true,
-}).extend({
-  id: z.string().uuid(),
-  name: z.string(),
-  headline: z.string(),
-  creativeUrl: z.string().url(),
-  destinationUrl: z.string().url(),
-  placement: SponsorPlacementSchema,
-  priority: z.number().int().nonnegative(),
-  createdAt: z.string().datetime(),
+// Public view exposed to presentation layers (no internal notes, targeting rules, or CRM details)
+export const PublicSponsorSchema = SponsorRecordSchema.pick({
+  id: true,
+  name: true,
+  headline: true,
+  creativeUrl: true,
+  destinationUrl: true,
+  placement: true,
+  priority: true,
+  createdAt: true,
 });
 
 export type PublicSponsor = z.infer<typeof PublicSponsorSchema>;
