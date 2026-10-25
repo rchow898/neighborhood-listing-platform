@@ -6,12 +6,14 @@ import {
   isSponsorEligible,
 } from "../types/sponsor";
 import { DEFAULT_HOUSE_SPONSORS } from "./sponsorFallback";
+import { validateNonDiscriminatoryContext } from "./sponsorCompliance";
 
 /**
- * Step 4: Pure selection function separated from rendering.
+ * Step 4 & 7: Pure selection function separated from rendering and guarded by compliance validation.
  * 
  * - Pure: No DOM access, no fetch/DB calls, no internal mutation.
  * - Deterministic: Always produces identical output for identical inputs.
+ * - Compliant: Validates that context contains no sensitive demographic or identity traits.
  * 
  * @param context The active page, time, and geographic context
  * @param candidates The list of candidate sponsor records to evaluate
@@ -21,6 +23,9 @@ export function selectSponsor(
   context: EligibilityContext,
   candidates: SponsorRecord[]
 ): PublicSponsor | null {
+  // Step 7: Guard against sensitive traits, identity tracking, or discriminatory parameters
+  validateNonDiscriminatoryContext(context);
+
   // 1. Filter candidates by explicit Step 1 eligibility rules
   const eligible = candidates.filter((sponsor) =>
     isSponsorEligible(sponsor, context)

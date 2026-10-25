@@ -39,3 +39,19 @@ When two or more sponsor records satisfy all eligibility criteria, candidate ran
 - **Automated Test Reproducibility**: Randomized selection (such as `ORDER BY RANDOM()`) causes test runners (e.g., Vitest) to be flaky. A deterministic order guarantees identical inputs produce identical chosen sponsors across all test runs.
 - **Auditability**: Regulators, auditors, and project reviewers can inspect a candidate pool and verify precisely why Sponsor A was chosen over Sponsor B.
 - **Fairness & Predictability**: Prevents starvation without relying on hidden state or unrecorded session cache.
+
+---
+
+## 3. Fair Housing & Non-Discrimination Compliance Guardrails (Step 7)
+
+In compliance with the Fair Housing Act (42 U.S.C. 3604(c)) and digital consumer privacy standards:
+
+1. **Permitted Targeting Dimensions**:
+   - Explicit rendering placement context (`listing_sidebar`, `property_banner`, `search_header`).
+   - Broad geographic locality (5-digit ZIP code or coarse regional radius).
+   - Temporal validity (runtime UTC timestamp).
+
+2. **Strictly Prohibited Inputs & Inferences**:
+   - **Protected Demographic Traits**: Any targeting based on race, color, national origin, religion, sex/gender, familial status, or disability is strictly barred from database schemas and runtime parameters.
+   - **Caller Identity Tracking**: Caller profile IDs, persistent tracking cookies, cross-session user identifiers, and device fingerprints MUST NOT be passed to or utilized by candidate selection queries.
+   - **Discriminatory Filtering / Redlining**: Campaigns may not use exclusionary demographic filters or selective neighborhood redlining.
