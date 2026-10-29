@@ -40,6 +40,6 @@ This subsystem manages the lifecycle of property listings, connects active tier-
 
 | Story Identifier | Scope Estimate | Target Database Migration | Target Route Handler |
 | :--- | :--- | :--- | :--- |
-| **Story 1 (Property Owner)** | `Medium` | `supabase/migrations/20261029_create_properties.sql` (Properties schema & owner RLS) | `src/app/api/properties/route.ts` (`POST`) |
-| **Story 2 (Public Inquirer)** | `Medium` | `supabase/migrations/20261029_create_sponsors_and_inquiries.sql` (Sponsor joins & inquiry RLS) | `src/app/api/properties/route.ts` (`GET`), `src/app/api/inquiries/route.ts` (`POST`) |
-| **Story 3 (Platform Admin)** | `Small` | `supabase/migrations/20261029_admin_audit_policies.sql` (Global admin RLS bypass rules) | `src/app/api/admin/audit/route.ts` (`GET`) |
+| **Story 1 (Property Owner)** | `Medium` | `supabase/migrations/20261029140000_exam_schema_persistence.sql` (`properties`, `profiles`) | `src/app/api/properties/route.ts` (`POST`) |
+| **Story 2 (Public Inquirer)** | `Medium` | `supabase/migrations/20261029140000_exam_schema_persistence.sql` (`sponsors`, `property_sponsors`, `inquiries`) | `src/app/api/properties/route.ts` (`GET`), `src/app/api/inquiries/route.ts` (`POST`) |
+| **Story 3 (Platform Admin)** | `Small` | `supabase/migrations/20261029140000_exam_schema_persistence.sql` (schema definitions & constraints) | `src/app/api/admin/audit/route.ts` (`GET`) |
