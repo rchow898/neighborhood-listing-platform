@@ -1,6 +1,6 @@
 # AI Log
 
-| Tool | Prompt | Output Used | Output Rejected | Verification | Commit |
+| Step / Tool | Prompt Summary | Model Output Used | Model Output Rejected & Rationale | Verification Method | Associated Git Commit |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | ChatGPT | Plain-language explanation of Next.js, TS, and Tailwind stack | Architectural overview & ecosystem rationale | Vague non-technical buzzwords | Cross-referenced against Next.js documentation | Pending |
 | Gemini | Plain-language explanation of Next.js, TS, and Tailwind stack | Nuance on App Router routing & layout efficiency | Lengthy boilerplate code snippets | Validated against Next.js 14/15 App Router specs | Pending |
